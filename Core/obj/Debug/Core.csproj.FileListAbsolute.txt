@@ -1,0 +1,14 @@
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\Core.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\Core.pdb
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\de\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\es\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\fr\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\it\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\ja\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\ko\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\ru\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\zh-Hans\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\bin\Debug\zh-Hant\Microsoft.Expression.Drawing.resources.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\obj\Debug\Core.dll
+C:\Users\octav\Desktop\FrutasVerduras\Core\obj\Debug\Core.pdb
