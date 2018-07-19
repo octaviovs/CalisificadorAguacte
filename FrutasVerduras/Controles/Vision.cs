@@ -19,15 +19,18 @@ namespace FrutasVerduras.Pantallas
     {
 
         private WCamara vistaCamara;
+
         private FilterInfoCollection Dispositivos; 
         private VideoCaptureDevice FuenteDeVideo; 
 
 
         public Bitmap img;
+
         public Vision()
         {
             InitializeComponent();
             vistaCamara = new WCamara(this);
+
         }
 
         private void Vision_Load(object sender, EventArgs e)
@@ -35,48 +38,6 @@ namespace FrutasVerduras.Pantallas
             //LISTAR DISPOSITIVOS DE ENTRADAS DE VIDEO
             vistaCamara.ListadoDispositivos();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //ESTABLECER EL DISPOSITIVO SELECCIONADO COMO FUENTE DE VIDEO
-            FuenteDeVideo = new VideoCaptureDevice(Dispositivos[devicesCombo.SelectedIndex].MonikerString);
-            //INICIALIZAR EL CONTROL
-            videoSourcePlayer1.VideoSource = FuenteDeVideo;
-            //INICIAR LA RECEPCIÓN DE IMAGENES
-            videoSourcePlayer1.Start();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-            //DETENER LA RECEPCIÓN DE IMAGENES
-            //DETENER LA RECEPCIÓN DE IMAGENES
-            videoSourcePlayer1.SignalToStop();
-            videoSourcePlayer1.WaitForStop();
-            videoSourcePlayer1.VideoSource = null;
-          
-
-        }
-
-   
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-
-            //VARIBALE PARA LA IMAGEN
-            img = videoSourcePlayer1.GetCurrentVideoFrame();
-            //GUARDAR IMAGEN EN LA RUTA
-
-            if (pictureBox1.Image != null) pictureBox1.Image.Dispose();
-            pictureBox1.Image = img.Clone(
-                new Rectangle(0, 0, img.Width, img.Height),
-                System.Drawing.Imaging.PixelFormat.DontCare);
-            //BORRAR IMAGEN DE MEMORIA
-            img.Dispose();
-
-        }
-
         #region ICamara
         public FilterInfoCollection videoDevices
         {
@@ -132,8 +93,40 @@ namespace FrutasVerduras.Pantallas
         {
           
         }
+
         #endregion
 
-      
+        private void buttonSeleccionar_Click(object sender, EventArgs e)
+        {
+            //ESTABLECER EL DISPOSITIVO SELECCIONADO COMO FUENTE DE VIDEO
+            FuenteDeVideo = new VideoCaptureDevice(Dispositivos[devicesCombo.SelectedIndex].MonikerString);
+            //INICIALIZAR EL CONTROL
+            FuenteDeVideo.NewFrame += new NewFrameEventHandler(c_NewFrame);
+            //INICIAR LA RECEPCIÓN DE IMAGENES
+            FuenteDeVideo.Start();
+        }
+        private void c_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Bitmap bm = (Bitmap)eventArgs.Frame.Clone();
+            pictureBoxCamara.Image = bm;
+        }
+
+        private void buttonDesconectar_Click(object sender, EventArgs e)
+        {
+            //DETENER LA RECEPCIÓN DE IMAGENES
+            FuenteDeVideo.SignalToStop();
+            FuenteDeVideo.WaitForStop();
+            FuenteDeVideo.Stop();
+        }
+
+        private void buttonFoto_Click(object sender, EventArgs e)
+        {
+            //VARIBALE PARA LA IMAGEN
+            img = new Bitmap(pictureBoxCamara.Image);
+            //GUARDAR IMAGEN EN LA RUTA
+            pictureBoxFotoGenerica.Image = img;
+
+
+        }
     }
 }

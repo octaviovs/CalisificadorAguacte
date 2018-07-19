@@ -30,12 +30,13 @@
         {
             this.devicesCombo = new System.Windows.Forms.ComboBox();
             this.buttonSeleccionar = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.videoSourcePlayer1 = new AForge.Controls.VideoSourcePlayer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonDesconectar = new System.Windows.Forms.Button();
+            this.pictureBoxCamara = new System.Windows.Forms.PictureBox();
+            this.buttonFoto = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBoxFotoGenerica = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamara)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFotoGenerica)).BeginInit();
             this.SuspendLayout();
             // 
             // devicesCombo
@@ -56,49 +57,39 @@
             this.buttonSeleccionar.TabIndex = 1;
             this.buttonSeleccionar.Text = "Conectar";
             this.buttonSeleccionar.UseVisualStyleBackColor = false;
-            this.buttonSeleccionar.Click += new System.EventHandler(this.button1_Click);
+            this.buttonSeleccionar.Click += new System.EventHandler(this.buttonSeleccionar_Click);
             // 
-            // button2
+            // buttonDesconectar
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Location = new System.Drawing.Point(281, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(81, 53);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Desconectar";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDesconectar.BackColor = System.Drawing.Color.Red;
+            this.buttonDesconectar.Location = new System.Drawing.Point(281, 3);
+            this.buttonDesconectar.Name = "buttonDesconectar";
+            this.buttonDesconectar.Size = new System.Drawing.Size(81, 53);
+            this.buttonDesconectar.TabIndex = 2;
+            this.buttonDesconectar.Text = "Desconectar";
+            this.buttonDesconectar.UseVisualStyleBackColor = false;
+            this.buttonDesconectar.Click += new System.EventHandler(this.buttonDesconectar_Click);
             // 
-            // videoSourcePlayer1
+            // pictureBoxCamara
             // 
-            this.videoSourcePlayer1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.videoSourcePlayer1.Location = new System.Drawing.Point(3, 73);
-            this.videoSourcePlayer1.Name = "videoSourcePlayer1";
-            this.videoSourcePlayer1.Size = new System.Drawing.Size(452, 304);
-            this.videoSourcePlayer1.TabIndex = 3;
-            this.videoSourcePlayer1.Text = "videoSourcePlayer1";
-            this.videoSourcePlayer1.VideoSource = null;
+            this.pictureBoxCamara.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pictureBoxCamara.Location = new System.Drawing.Point(18, 74);
+            this.pictureBoxCamara.Name = "pictureBoxCamara";
+            this.pictureBoxCamara.Size = new System.Drawing.Size(452, 314);
+            this.pictureBoxCamara.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCamara.TabIndex = 4;
+            this.pictureBoxCamara.TabStop = false;
             // 
-            // pictureBox1
+            // buttonFoto
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBox1.Location = new System.Drawing.Point(506, 73);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(225, 163);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Yellow;
-            this.button3.Location = new System.Drawing.Point(368, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 53);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Foto";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonFoto.BackColor = System.Drawing.Color.Yellow;
+            this.buttonFoto.Location = new System.Drawing.Point(368, 3);
+            this.buttonFoto.Name = "buttonFoto";
+            this.buttonFoto.Size = new System.Drawing.Size(87, 53);
+            this.buttonFoto.TabIndex = 5;
+            this.buttonFoto.Text = "Foto";
+            this.buttonFoto.UseVisualStyleBackColor = false;
+            this.buttonFoto.Click += new System.EventHandler(this.buttonFoto_Click);
             // 
             // label1
             // 
@@ -110,21 +101,32 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Camara Principal";
             // 
+            // pictureBoxFotoGenerica
+            // 
+            this.pictureBoxFotoGenerica.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pictureBoxFotoGenerica.Location = new System.Drawing.Point(476, 74);
+            this.pictureBoxFotoGenerica.Name = "pictureBoxFotoGenerica";
+            this.pictureBoxFotoGenerica.Size = new System.Drawing.Size(263, 169);
+            this.pictureBoxFotoGenerica.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxFotoGenerica.TabIndex = 7;
+            this.pictureBoxFotoGenerica.TabStop = false;
+            // 
             // Vision
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBoxFotoGenerica);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.videoSourcePlayer1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonFoto);
+            this.Controls.Add(this.pictureBoxCamara);
+            this.Controls.Add(this.buttonDesconectar);
             this.Controls.Add(this.buttonSeleccionar);
             this.Controls.Add(this.devicesCombo);
             this.Name = "Vision";
             this.Size = new System.Drawing.Size(949, 500);
             this.Load += new System.EventHandler(this.Vision_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamara)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFotoGenerica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,10 +136,10 @@
 
         private System.Windows.Forms.ComboBox devicesCombo;
         private System.Windows.Forms.Button buttonSeleccionar;
-        private System.Windows.Forms.Button button2;
-        private AForge.Controls.VideoSourcePlayer videoSourcePlayer1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonDesconectar;
+        private System.Windows.Forms.PictureBox pictureBoxCamara;
+        private System.Windows.Forms.Button buttonFoto;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBoxFotoGenerica;
     }
 }

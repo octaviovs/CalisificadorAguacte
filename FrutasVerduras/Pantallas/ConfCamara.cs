@@ -257,76 +257,76 @@ namespace FrutasVerduras.Pantallas
             }
         }
 
-        //private void connectButton_Click(object sender, EventArgs e)
-        //{
-        //    if (videoDevice != null)
-        //    {
-        //        if ((videoCapabilities != null) && (videoCapabilities.Length != 0))
-        //        {
-        //            videoDevice.VideoResolution = videoCapabilities[videoResolutionsCombo.SelectedIndex];
-        //        }
+        private void connectButton_Click(object sender, EventArgs e)
+        {
+            if (videoDevice != null)
+            {
+                if ((videoCapabilities != null) && (videoCapabilities.Length != 0))
+                {
+                    videoDevice.VideoResolution = videoCapabilities[videoResolutionsCombo.SelectedIndex];
+                }
 
-        //        if ((snapshotCapabilities != null) && (snapshotCapabilities.Length != 0))
-        //        {
-        //            videoDevice.ProvideSnapshots = true;
-        //            videoDevice.SnapshotResolution = snapshotCapabilities[snapshotResolutionsCombo.SelectedIndex];
-
-            
-        //            videoDevice.SnapshotFrame += new NewFrameEventHandler(videoDevice_SnapshotFrame); //////Verificar esta parte
-        //        }
-
-        //        EnableConnectionControls(false);
-
-        //        videoSourcePlayer.VideoSource = videoDevice;
-        //        videoSourcePlayer.Start();
-        //    }
-        //}
-      
-        //private void disconnectButton_Click(object sender, EventArgs e)
-        //{
-        //    Disconnect();
-        //}
-
-        //private void triggerButton_Click(object sender, EventArgs e)
-        //{
-
-        //    if ((videoDevice != null) && (videoDevice.ProvideSnapshots))
-        //    {
-        //        videoDevice.SimulateTrigger();
-        //    }
+                if ((snapshotCapabilities != null) && (snapshotCapabilities.Length != 0))
+                {
+                    videoDevice.ProvideSnapshots = true;
+                    videoDevice.SnapshotResolution = snapshotCapabilities[snapshotResolutionsCombo.SelectedIndex];
 
 
-        //}
-        //private void videoDevice_SnapshotFrame(object sender, NewFrameEventArgs eventArgs)
-        //{
-        //    Console.WriteLine(eventArgs.Frame.Size);
+                    videoDevice.SnapshotFrame += new NewFrameEventHandler(videoDevice_SnapshotFrame); //////Verificar esta parte
+                }
 
-        //    ShowSnapshot((Bitmap)eventArgs.Frame.Clone());
-        //}
+                EnableConnectionControls(false);
 
-        //private void ShowSnapshot(Bitmap snapshot)
-        //{
-        //    if (InvokeRequired)
-        //    {
-        //        Invoke(new Action<Bitmap>(ShowSnapshot), snapshot);
-        //    }
-        //    else
-        //    {
-        //        if (snapshotForm == null)
-        //        {
-        //            snapshotForm = new Procesamiento();
-        //            snapshotForm.FormClosed += new FormClosedEventHandler(snapshotForm_FormClosed);
-        //            snapshotForm.Show();
-        //        }
+                videoSourcePlayer.VideoSource = videoDevice;
+                videoSourcePlayer.Start();
+            }
+        }
 
-        //      //  snapshotForm.SetImage(snapshot);
-        //    }
-        //}
+        private void disconnectButton_Click(object sender, EventArgs e)
+        {
+            Disconnect();
+        }
 
-        //private void snapshotForm_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //    snapshotForm = null;
-        //}
+        private void triggerButton_Click(object sender, EventArgs e)
+        {
+
+            if ((videoDevice != null) && (videoDevice.ProvideSnapshots))
+            {
+                videoDevice.SimulateTrigger();
+            }
+
+
+        }
+        private void videoDevice_SnapshotFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Console.WriteLine(eventArgs.Frame.Size);
+
+            ShowSnapshot((Bitmap)eventArgs.Frame.Clone());
+        }
+
+        private void ShowSnapshot(Bitmap snapshot)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<Bitmap>(ShowSnapshot), snapshot);
+            }
+            else
+            {
+                //if (snapshotForm == null)
+                //{
+                //    snapshotForm = new Procesamiento();
+                //    snapshotForm.FormClosed += new FormClosedEventHandler(snapshotForm_FormClosed);
+                //    snapshotForm.Show();
+                //}
+
+                //  snapshotForm.SetImage(snapshot);
+            }
+        }
+
+        private void snapshotForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+          //  snapshotForm = null;
+        }
 
 
     }

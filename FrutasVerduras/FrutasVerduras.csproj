@@ -58,11 +58,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controles\histograma.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\histograma.Designer.cs">
+      <DependentUpon>histograma.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\banda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\banda.Designer.cs">
+      <DependentUpon>banda.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\Conexion.cs">
       <SubType>Form</SubType>
@@ -90,8 +102,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controles\histograma.resx">
+      <DependentUpon>histograma.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\banda.resx">
+      <DependentUpon>banda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Conexion.resx">
       <DependentUpon>Conexion.cs</DependentUpon>

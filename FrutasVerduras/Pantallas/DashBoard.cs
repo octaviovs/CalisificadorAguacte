@@ -76,11 +76,11 @@ namespace FrutasVerduras.Pantallas
         }
         private void buttonMaquina_Click(object sender, EventArgs e)
         {
-          
+            AbririFormPanel(new banda());
         }
         private void buttonConfCamara_Click(object sender, EventArgs e)
         {
-
+            AbririFormPanel(new ConfCamara());
         }
 
         private void buttonConfPuertos_Click(object sender, EventArgs e)
