@@ -12,7 +12,7 @@ using AForge.Video.DirectShow;
 using Core.Model;
 using Core.Presenter;
 using Core.View;
-
+using Core.Procesamiento;
 namespace FrutasVerduras.Pantallas
 {
     public partial class Vision : UserControl,ICamara
@@ -26,6 +26,8 @@ namespace FrutasVerduras.Pantallas
 
         public Bitmap img;
 
+        
+        
         public Vision()
         {
             InitializeComponent();
@@ -125,8 +127,8 @@ namespace FrutasVerduras.Pantallas
             img = new Bitmap(pictureBoxCamara.Image);
             //GUARDAR IMAGEN EN LA RUTA
             pictureBoxFotoGenerica.Image = img;
-
-
         }
+
+
     }
 }

@@ -33,8 +33,9 @@
             this.buttonDesconectar = new System.Windows.Forms.Button();
             this.pictureBoxCamara = new System.Windows.Forms.PictureBox();
             this.buttonFoto = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxFotoGenerica = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamara)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFotoGenerica)).BeginInit();
             this.SuspendLayout();
@@ -73,9 +74,9 @@
             // pictureBoxCamara
             // 
             this.pictureBoxCamara.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBoxCamara.Location = new System.Drawing.Point(18, 74);
+            this.pictureBoxCamara.Location = new System.Drawing.Point(3, 74);
             this.pictureBoxCamara.Name = "pictureBoxCamara";
-            this.pictureBoxCamara.Size = new System.Drawing.Size(452, 314);
+            this.pictureBoxCamara.Size = new System.Drawing.Size(467, 355);
             this.pictureBoxCamara.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCamara.TabIndex = 4;
             this.pictureBoxCamara.TabStop = false;
@@ -91,30 +92,41 @@
             this.buttonFoto.UseVisualStyleBackColor = false;
             this.buttonFoto.Click += new System.EventHandler(this.buttonFoto_Click);
             // 
+            // pictureBoxFotoGenerica
+            // 
+            this.pictureBoxFotoGenerica.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pictureBoxFotoGenerica.Location = new System.Drawing.Point(486, 74);
+            this.pictureBoxFotoGenerica.Name = "pictureBoxFotoGenerica";
+            this.pictureBoxFotoGenerica.Size = new System.Drawing.Size(212, 143);
+            this.pictureBoxFotoGenerica.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxFotoGenerica.TabIndex = 7;
+            this.pictureBoxFotoGenerica.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(102, 391);
+            this.label1.Location = new System.Drawing.Point(74, 449);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 29);
             this.label1.TabIndex = 6;
             this.label1.Text = "Camara Principal";
             // 
-            // pictureBoxFotoGenerica
+            // label2
             // 
-            this.pictureBoxFotoGenerica.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBoxFotoGenerica.Location = new System.Drawing.Point(476, 74);
-            this.pictureBoxFotoGenerica.Name = "pictureBoxFotoGenerica";
-            this.pictureBoxFotoGenerica.Size = new System.Drawing.Size(263, 169);
-            this.pictureBoxFotoGenerica.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxFotoGenerica.TabIndex = 7;
-            this.pictureBoxFotoGenerica.TabStop = false;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(520, 231);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(126, 20);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Foto de objeto";
             // 
             // Vision
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBoxFotoGenerica);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonFoto);
@@ -139,7 +151,8 @@
         private System.Windows.Forms.Button buttonDesconectar;
         private System.Windows.Forms.PictureBox pictureBoxCamara;
         private System.Windows.Forms.Button buttonFoto;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxFotoGenerica;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
