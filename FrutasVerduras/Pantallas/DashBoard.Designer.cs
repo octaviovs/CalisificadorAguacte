@@ -62,18 +62,17 @@
             this.BarraTitulo.Controls.Add(this.IconRestau);
             this.BarraTitulo.Controls.Add(this.inconMaxi);
             this.BarraTitulo.Controls.Add(this.inconCerrar);
-            this.BarraTitulo.Controls.Add(this.btnslide);
             this.BarraTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BarraTitulo.Location = new System.Drawing.Point(210, 0);
+            this.BarraTitulo.Location = new System.Drawing.Point(140, 0);
             this.BarraTitulo.Name = "BarraTitulo";
-            this.BarraTitulo.Size = new System.Drawing.Size(960, 43);
+            this.BarraTitulo.Size = new System.Drawing.Size(1138, 43);
             this.BarraTitulo.TabIndex = 3;
             this.BarraTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTitulo_MouseDown);
             // 
             // Iconmin
             // 
             this.Iconmin.Image = ((System.Drawing.Image)(resources.GetObject("Iconmin.Image")));
-            this.Iconmin.Location = new System.Drawing.Point(623, 7);
+            this.Iconmin.Location = new System.Drawing.Point(810, 7);
             this.Iconmin.Name = "Iconmin";
             this.Iconmin.Size = new System.Drawing.Size(30, 27);
             this.Iconmin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -84,7 +83,7 @@
             // IconRestau
             // 
             this.IconRestau.Image = ((System.Drawing.Image)(resources.GetObject("IconRestau.Image")));
-            this.IconRestau.Location = new System.Drawing.Point(709, 7);
+            this.IconRestau.Location = new System.Drawing.Point(882, 7);
             this.IconRestau.Name = "IconRestau";
             this.IconRestau.Size = new System.Drawing.Size(30, 27);
             this.IconRestau.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -96,7 +95,7 @@
             // inconMaxi
             // 
             this.inconMaxi.Image = ((System.Drawing.Image)(resources.GetObject("inconMaxi.Image")));
-            this.inconMaxi.Location = new System.Drawing.Point(673, 7);
+            this.inconMaxi.Location = new System.Drawing.Point(846, 7);
             this.inconMaxi.Name = "inconMaxi";
             this.inconMaxi.Size = new System.Drawing.Size(30, 27);
             this.inconMaxi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -107,7 +106,7 @@
             // inconCerrar
             // 
             this.inconCerrar.Image = ((System.Drawing.Image)(resources.GetObject("inconCerrar.Image")));
-            this.inconCerrar.Location = new System.Drawing.Point(765, 7);
+            this.inconCerrar.Location = new System.Drawing.Point(918, 7);
             this.inconCerrar.Name = "inconCerrar";
             this.inconCerrar.Size = new System.Drawing.Size(30, 27);
             this.inconCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -117,8 +116,8 @@
             // 
             // btnslide
             // 
-            this.btnslide.Image = global::FrutasVerduras.Properties.Resources.Mobile_Menu_Icon;
-            this.btnslide.Location = new System.Drawing.Point(15, 7);
+            this.btnslide.Image = ((System.Drawing.Image)(resources.GetObject("btnslide.Image")));
+            this.btnslide.Location = new System.Drawing.Point(104, 15);
             this.btnslide.Name = "btnslide";
             this.btnslide.Size = new System.Drawing.Size(30, 30);
             this.btnslide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -133,13 +132,14 @@
             this.MenuVertical.Controls.Add(this.buttonSalir);
             this.MenuVertical.Controls.Add(this.label1);
             this.MenuVertical.Controls.Add(this.buttonMaquina);
+            this.MenuVertical.Controls.Add(this.btnslide);
             this.MenuVertical.Controls.Add(this.buttonConfCamara);
             this.MenuVertical.Controls.Add(this.buttonConfPuertos);
             this.MenuVertical.Controls.Add(this.pictureBox1);
             this.MenuVertical.Dock = System.Windows.Forms.DockStyle.Left;
             this.MenuVertical.Location = new System.Drawing.Point(0, 0);
             this.MenuVertical.Name = "MenuVertical";
-            this.MenuVertical.Size = new System.Drawing.Size(210, 708);
+            this.MenuVertical.Size = new System.Drawing.Size(140, 708);
             this.MenuVertical.TabIndex = 2;
             // 
             // buttonDocumentacion
@@ -151,11 +151,11 @@
             this.buttonDocumentacion.ForeColor = System.Drawing.Color.White;
             this.buttonDocumentacion.Image = ((System.Drawing.Image)(resources.GetObject("buttonDocumentacion.Image")));
             this.buttonDocumentacion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDocumentacion.Location = new System.Drawing.Point(3, 223);
+            this.buttonDocumentacion.Location = new System.Drawing.Point(4, 245);
             this.buttonDocumentacion.Name = "buttonDocumentacion";
-            this.buttonDocumentacion.Size = new System.Drawing.Size(203, 35);
+            this.buttonDocumentacion.Size = new System.Drawing.Size(133, 35);
             this.buttonDocumentacion.TabIndex = 5;
-            this.buttonDocumentacion.Text = "Documentación";
+            this.buttonDocumentacion.Text = "Doc";
             this.buttonDocumentacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonDocumentacion.UseVisualStyleBackColor = false;
             this.buttonDocumentacion.Click += new System.EventHandler(this.buttonDocumentacion_Click);
@@ -169,9 +169,9 @@
             this.buttonSalir.ForeColor = System.Drawing.Color.White;
             this.buttonSalir.Image = ((System.Drawing.Image)(resources.GetObject("buttonSalir.Image")));
             this.buttonSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSalir.Location = new System.Drawing.Point(0, 264);
+            this.buttonSalir.Location = new System.Drawing.Point(3, 286);
             this.buttonSalir.Name = "buttonSalir";
-            this.buttonSalir.Size = new System.Drawing.Size(206, 35);
+            this.buttonSalir.Size = new System.Drawing.Size(134, 35);
             this.buttonSalir.TabIndex = 4;
             this.buttonSalir.Text = "Salir";
             this.buttonSalir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -183,7 +183,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(79, 18);
+            this.label1.Location = new System.Drawing.Point(18, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 25);
             this.label1.TabIndex = 0;
@@ -198,11 +198,11 @@
             this.buttonMaquina.ForeColor = System.Drawing.Color.White;
             this.buttonMaquina.Image = ((System.Drawing.Image)(resources.GetObject("buttonMaquina.Image")));
             this.buttonMaquina.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMaquina.Location = new System.Drawing.Point(3, 117);
+            this.buttonMaquina.Location = new System.Drawing.Point(4, 139);
             this.buttonMaquina.Name = "buttonMaquina";
-            this.buttonMaquina.Size = new System.Drawing.Size(203, 47);
+            this.buttonMaquina.Size = new System.Drawing.Size(133, 47);
             this.buttonMaquina.TabIndex = 3;
-            this.buttonMaquina.Text = "Controles cinta";
+            this.buttonMaquina.Text = "Cinta";
             this.buttonMaquina.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonMaquina.UseVisualStyleBackColor = false;
             this.buttonMaquina.Click += new System.EventHandler(this.buttonMaquina_Click);
@@ -216,9 +216,9 @@
             this.buttonConfCamara.ForeColor = System.Drawing.Color.White;
             this.buttonConfCamara.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfCamara.Image")));
             this.buttonConfCamara.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonConfCamara.Location = new System.Drawing.Point(3, 170);
+            this.buttonConfCamara.Location = new System.Drawing.Point(4, 192);
             this.buttonConfCamara.Name = "buttonConfCamara";
-            this.buttonConfCamara.Size = new System.Drawing.Size(203, 47);
+            this.buttonConfCamara.Size = new System.Drawing.Size(133, 47);
             this.buttonConfCamara.TabIndex = 2;
             this.buttonConfCamara.Text = "Camara";
             this.buttonConfCamara.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -234,9 +234,9 @@
             this.buttonConfPuertos.ForeColor = System.Drawing.Color.White;
             this.buttonConfPuertos.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfPuertos.Image")));
             this.buttonConfPuertos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonConfPuertos.Location = new System.Drawing.Point(4, 76);
+            this.buttonConfPuertos.Location = new System.Drawing.Point(4, 98);
             this.buttonConfPuertos.Name = "buttonConfPuertos";
-            this.buttonConfPuertos.Size = new System.Drawing.Size(203, 35);
+            this.buttonConfPuertos.Size = new System.Drawing.Size(134, 35);
             this.buttonConfPuertos.TabIndex = 1;
             this.buttonConfPuertos.Text = "Puertos";
             this.buttonConfPuertos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -256,24 +256,25 @@
             // panelContenedor
             // 
             this.panelContenedor.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panelContenedor.Location = new System.Drawing.Point(212, 497);
+            this.panelContenedor.Location = new System.Drawing.Point(140, 526);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(958, 211);
+            this.panelContenedor.Size = new System.Drawing.Size(1246, 182);
             this.panelContenedor.TabIndex = 5;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Yellow;
-            this.panel1.Location = new System.Drawing.Point(210, 482);
+            this.panel1.Location = new System.Drawing.Point(140, 510);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(960, 13);
+            this.panel1.Size = new System.Drawing.Size(1243, 10);
             this.panel1.TabIndex = 6;
             // 
             // vision1
             // 
-            this.vision1.Location = new System.Drawing.Point(212, 49);
+            this.vision1.imagenProceso = null;
+            this.vision1.Location = new System.Drawing.Point(140, 49);
             this.vision1.Name = "vision1";
-            this.vision1.Size = new System.Drawing.Size(932, 427);
+            this.vision1.Size = new System.Drawing.Size(1138, 455);
             this.vision1.TabIndex = 7;
             this.vision1.videoDevice = null;
             // 
@@ -281,7 +282,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1170, 708);
+            this.ClientSize = new System.Drawing.Size(1278, 708);
             this.Controls.Add(this.vision1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelContenedor);

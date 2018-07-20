@@ -26,12 +26,13 @@ namespace FrutasVerduras.Pantallas
 
         public Bitmap img;
 
-        
+        Histograma miHistograma;
         
         public Vision()
         {
             InitializeComponent();
             vistaCamara = new WCamara(this);
+            miHistograma = new Histograma();
 
         }
 
@@ -126,9 +127,39 @@ namespace FrutasVerduras.Pantallas
             //VARIBALE PARA LA IMAGEN
             img = new Bitmap(pictureBoxCamara.Image);
             //GUARDAR IMAGEN EN LA RUTA
-            pictureBoxFotoGenerica.Image = img;
+            pictureBoxFotoGenerica.Image = CropBitmap(img,300,300,100,100);
+
+
+            Bitmap lol = new Bitmap(pictureBoxFotoGenerica.Image);
+
+
+            int[,] values = miHistograma.getHistograma(lol);
+                        int[] rojo = new int[values.GetLength(1)];
+                        int[] verde = new int[values.GetLength(1)];
+                        int[] azul = new int[values.GetLength(1)];
+                        for (int i = 0; i < values.GetLength(0); i++)
+                        {
+
+                            for (int j = 0; j < values.GetLength(1); j++)
+                            {
+                                rojo[j] =(i==0) ? values[i, j]: rojo[j];
+                                verde[j] = (i == 1) ? values[i, j] : rojo[j];
+                                azul[j] = (i == 2) ? values[i, j] : rojo[j];
+                            }
+
+                        }
+
+                    histogramRojo.UseWaitCursor = true;
+                       histogramRojo.Values = rojo;
+                        histogramVerde.Values = verde;
+                        histogramAzul.Values = azul;
         }
 
-
+        public Bitmap CropBitmap(Bitmap bitmap, int cropX, int cropY, int cropWidth, int cropHeight)
+        {
+            Rectangle rect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
+            Bitmap cropped = bitmap.Clone(rect, bitmap.PixelFormat);
+            return cropped;
+        }
     }
 }

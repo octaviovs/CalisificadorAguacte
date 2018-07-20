@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-
 using System.Runtime.InteropServices;
+
+using Core.Procesamiento;
 namespace FrutasVerduras.Pantallas
 {
     public partial class contenedor : Form
@@ -111,11 +112,7 @@ namespace FrutasVerduras.Pantallas
             fh.Show();
         }
 
-
-
-
-
-
+        int[,] histoAcumulado;
 
 
     }

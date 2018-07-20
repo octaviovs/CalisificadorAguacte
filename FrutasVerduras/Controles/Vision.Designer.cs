@@ -36,6 +36,12 @@
             this.pictureBoxFotoGenerica = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.histogramRojo = new AForge.Controls.Histogram();
+            this.histogramVerde = new AForge.Controls.Histogram();
+            this.histogramAzul = new AForge.Controls.Histogram();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamara)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFotoGenerica)).BeginInit();
             this.SuspendLayout();
@@ -74,9 +80,9 @@
             // pictureBoxCamara
             // 
             this.pictureBoxCamara.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBoxCamara.Location = new System.Drawing.Point(3, 74);
+            this.pictureBoxCamara.Location = new System.Drawing.Point(6, 62);
             this.pictureBoxCamara.Name = "pictureBoxCamara";
-            this.pictureBoxCamara.Size = new System.Drawing.Size(467, 355);
+            this.pictureBoxCamara.Size = new System.Drawing.Size(466, 355);
             this.pictureBoxCamara.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCamara.TabIndex = 4;
             this.pictureBoxCamara.TabStop = false;
@@ -95,9 +101,9 @@
             // pictureBoxFotoGenerica
             // 
             this.pictureBoxFotoGenerica.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBoxFotoGenerica.Location = new System.Drawing.Point(486, 74);
+            this.pictureBoxFotoGenerica.Location = new System.Drawing.Point(478, 62);
             this.pictureBoxFotoGenerica.Name = "pictureBoxFotoGenerica";
-            this.pictureBoxFotoGenerica.Size = new System.Drawing.Size(212, 143);
+            this.pictureBoxFotoGenerica.Size = new System.Drawing.Size(215, 160);
             this.pictureBoxFotoGenerica.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxFotoGenerica.TabIndex = 7;
             this.pictureBoxFotoGenerica.TabStop = false;
@@ -106,7 +112,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(74, 449);
+            this.label1.Location = new System.Drawing.Point(100, 420);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 29);
             this.label1.TabIndex = 6;
@@ -116,16 +122,79 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(520, 231);
+            this.label2.Location = new System.Drawing.Point(505, 225);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 20);
             this.label2.TabIndex = 8;
             this.label2.Text = "Foto de objeto";
             // 
+            // histogramRojo
+            // 
+            this.histogramRojo.Location = new System.Drawing.Point(478, 248);
+            this.histogramRojo.Name = "histogramRojo";
+            this.histogramRojo.Size = new System.Drawing.Size(215, 169);
+            this.histogramRojo.TabIndex = 9;
+            this.histogramRojo.Text = "histogramRojo";
+            this.histogramRojo.Values = null;
+            // 
+            // histogramVerde
+            // 
+            this.histogramVerde.Location = new System.Drawing.Point(699, 248);
+            this.histogramVerde.Name = "histogramVerde";
+            this.histogramVerde.Size = new System.Drawing.Size(215, 169);
+            this.histogramVerde.TabIndex = 11;
+            this.histogramVerde.Text = "histogramVerde";
+            this.histogramVerde.Values = null;
+            // 
+            // histogramAzul
+            // 
+            this.histogramAzul.Location = new System.Drawing.Point(920, 248);
+            this.histogramAzul.Name = "histogramAzul";
+            this.histogramAzul.Size = new System.Drawing.Size(215, 169);
+            this.histogramAzul.TabIndex = 12;
+            this.histogramAzul.Text = "histogramAzul";
+            this.histogramAzul.Values = null;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(546, 420);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 18);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Rojo";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(766, 420);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 18);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Verde";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1003, 420);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 18);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Azul";
+            // 
             // Vision
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.histogramAzul);
+            this.Controls.Add(this.histogramVerde);
+            this.Controls.Add(this.histogramRojo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBoxFotoGenerica);
             this.Controls.Add(this.label1);
@@ -135,7 +204,7 @@
             this.Controls.Add(this.buttonSeleccionar);
             this.Controls.Add(this.devicesCombo);
             this.Name = "Vision";
-            this.Size = new System.Drawing.Size(949, 500);
+            this.Size = new System.Drawing.Size(1142, 500);
             this.Load += new System.EventHandler(this.Vision_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamara)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFotoGenerica)).EndInit();
@@ -154,5 +223,11 @@
         private System.Windows.Forms.PictureBox pictureBoxFotoGenerica;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private AForge.Controls.Histogram histogramRojo;
+        private AForge.Controls.Histogram histogramVerde;
+        private AForge.Controls.Histogram histogramAzul;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
