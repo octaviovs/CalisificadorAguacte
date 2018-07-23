@@ -26,7 +26,7 @@ namespace FrutasVerduras.Pantallas
 
         public Bitmap img;
 
-        Histograma miHistograma;
+        public Histograma miHistograma;
         
         public Vision()
         {
@@ -124,16 +124,13 @@ namespace FrutasVerduras.Pantallas
 
         private void buttonFoto_Click(object sender, EventArgs e)
         {
-            //VARIBALE PARA LA IMAGEN
+            //VARIBALE PARA LA IMAGEN- imagen original
             img = new Bitmap(pictureBoxCamara.Image);
-            //GUARDAR IMAGEN EN LA RUTA
-            pictureBoxFotoGenerica.Image = CropBitmap(img,300,300,100,100);
+            //GUARDAR IMAGEN EN LA RUTA- se recorta la imagen orginar
+            pictureBoxFotoGenerica.Image = CropBitmap(img,500,500,50,50);
+            Bitmap fotoProcesada = new Bitmap(pictureBoxFotoGenerica.Image);
 
-
-            Bitmap lol = new Bitmap(pictureBoxFotoGenerica.Image);
-
-
-            int[,] values = miHistograma.getHistograma(lol);
+            int[,] values = miHistograma.getHistograma(fotoProcesada);
                         int[] rojo = new int[values.GetLength(1)];
                         int[] verde = new int[values.GetLength(1)];
                         int[] azul = new int[values.GetLength(1)];
@@ -149,7 +146,6 @@ namespace FrutasVerduras.Pantallas
 
                         }
 
-                    histogramRojo.UseWaitCursor = true;
                        histogramRojo.Values = rojo;
                         histogramVerde.Values = verde;
                         histogramAzul.Values = azul;

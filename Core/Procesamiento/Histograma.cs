@@ -13,7 +13,7 @@ namespace Core.Procesamiento
         public Histograma(){
           
         }
-        public int[,] matriz;
+
 
 
 
@@ -45,6 +45,7 @@ namespace Core.Procesamiento
             return matrizAcumulada;
         }
         
+
 
         public int[] histogramaGenerico(Bitmap bmp)
         {
