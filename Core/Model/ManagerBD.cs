@@ -26,7 +26,7 @@ namespace Core.Model
 
         public ManagerBD()
         {
-          //  strCadenaConexion = ConfigurationManager.ConnectionStrings["Hospital"].ConnectionString;
+            strCadenaConexion = ConfigurationManager.ConnectionStrings["A_frutas"].ConnectionString;
 
         }
 
@@ -38,7 +38,7 @@ namespace Core.Model
         public ManagerBD(string strNombreConexion)
         {
 
-           // strCadenaConexion = ConfigurationManager.ConnectionStrings[strNombreConexion].ConnectionString;
+            //strCadenaConexion = ConfigurationManager.ConnectionStrings[strNombreConexion].ConnectionString;
         }
 
         /// <summary>

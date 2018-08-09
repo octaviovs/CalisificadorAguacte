@@ -15,19 +15,19 @@ using Core.View;
 using Core.Procesamiento;
 namespace FrutasVerduras.Pantallas
 {
-    public partial class Vision : UserControl,ICamara
+    public partial class Vision : UserControl, ICamara
     {
 
         private WCamara vistaCamara;
 
-        private FilterInfoCollection Dispositivos; 
-        private VideoCaptureDevice FuenteDeVideo; 
+        private FilterInfoCollection Dispositivos;
+        private VideoCaptureDevice FuenteDeVideo;
 
 
         public Bitmap img;
 
         public Histograma miHistograma;
-        
+
         public Vision()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace FrutasVerduras.Pantallas
         }
 
         private void Vision_Load(object sender, EventArgs e)
-        { 
+        {
             //LISTAR DISPOSITIVOS DE ENTRADAS DE VIDEO
             vistaCamara.ListadoDispositivos();
         }
@@ -57,7 +57,7 @@ namespace FrutasVerduras.Pantallas
                         devicesCombo.Items.Add(x.Name);
                     devicesCombo.SelectedIndex = 0;
 
-            }
+                }
                 else
                 {
                     devicesCombo.Items.Add("No hay dispositivos");
@@ -75,7 +75,7 @@ namespace FrutasVerduras.Pantallas
 
             set
             {
-                
+
             }
         }
 
@@ -88,13 +88,13 @@ namespace FrutasVerduras.Pantallas
 
             set
             {
-                
+
             }
         }
 
         public void MensajeCamara(string Mensaje, int tipo)
         {
-          
+
         }
 
         #endregion
@@ -127,28 +127,47 @@ namespace FrutasVerduras.Pantallas
             //VARIBALE PARA LA IMAGEN- imagen original
             img = new Bitmap(pictureBoxCamara.Image);
             //GUARDAR IMAGEN EN LA RUTA- se recorta la imagen orginar
-            pictureBoxFotoGenerica.Image = CropBitmap(img,500,500,50,50);
+            pictureBoxFotoGenerica.Image = CropBitmap(img, 500, 500, 220, 220);
             Bitmap fotoProcesada = new Bitmap(pictureBoxFotoGenerica.Image);
 
             int[,] values = miHistograma.getHistograma(fotoProcesada);
-                        int[] rojo = new int[values.GetLength(1)];
-                        int[] verde = new int[values.GetLength(1)];
-                        int[] azul = new int[values.GetLength(1)];
-                        for (int i = 0; i < values.GetLength(0); i++)
-                        {
+            int[] rojo = new int[values.GetLength(1)];
+            int[] verde = new int[values.GetLength(1)];
+            int[] azul = new int[values.GetLength(1)];
+            int[] generico = new int[values.GetLength(1)];
+         
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
 
-                            for (int j = 0; j < values.GetLength(1); j++)
-                            {
-                                rojo[j] =(i==0) ? values[i, j]: rojo[j];
-                                verde[j] = (i == 1) ? values[i, j] : rojo[j];
-                                azul[j] = (i == 2) ? values[i, j] : rojo[j];
-                            }
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                   
+                    rojo[j] = (i == 0) ? values[i, j] : rojo[j];
+                    verde[j] = (i == 1) ? values[i, j] : verde[j];
+                    azul[j] = (i == 2) ? values[i, j] : azul[j];
+                }
 
-                        }
+            }
 
-                       histogramRojo.Values = rojo;
-                        histogramVerde.Values = verde;
-                        histogramAzul.Values = azul;
+            histogramRojo.Values = rojo;
+            histogramVerde.Values = verde;
+            histogramAzul.Values = azul;
+
+            int[] vR = miHistograma.GetPorcentajesColor(rojo);
+            int[] vV = miHistograma.GetPorcentajesColor(verde);
+            int[] vA = miHistograma.GetPorcentajesColor(azul);
+            string a = "";
+            string b = "";
+            string c = "";
+            for (int i = 0; i < vR.Length; i++)
+            {
+                a +="--" +vR[i]+"--";
+                b += "---"+vV[i]+"--";
+                c += vA[i];
+            }
+            textBox1.Text = a+"\n";
+           textBox1.Text +=" .........."+ b+"\n";
+           //textBox1.Text = c+"\n";
         }
 
         public Bitmap CropBitmap(Bitmap bitmap, int cropX, int cropY, int cropWidth, int cropHeight)
