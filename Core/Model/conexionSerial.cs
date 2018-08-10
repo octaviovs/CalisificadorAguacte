@@ -81,7 +81,11 @@ namespace Core.Model
 
         }
 
-
+        /// <summary>
+        /// Envia informacion al arduino 
+        /// </summary>
+        /// <param name="datos"></param>
+        /// <returns></returns>
         public bool setDato(string datos)
         {
 
@@ -101,17 +105,19 @@ namespace Core.Model
 
 
         }
-
-        public bool getDato( ref string info,string datos)
+        /// <summary>
+        /// Lee la informacion serial
+        /// </summary>
+        /// <param name="info"></param>
+       
+        /// <returns></returns>
+        public bool getDato( ref string info)
         {
             bool bandera = false;
             try {
 
                 info = miPuerto.ReadExisting();
                 bandera = (string.IsNullOrEmpty(info)) ? false:true;
-            
-
-
             }
             catch (Exception)
             {

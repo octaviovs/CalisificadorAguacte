@@ -26,7 +26,7 @@ namespace Core.Model
 
         public ManagerBD()
         {
-            strCadenaConexion = ConfigurationManager.ConnectionStrings["A_frutas"].ConnectionString;
+            strCadenaConexion = ConfigurationManager.ConnectionStrings["Frutas"].ConnectionString;
 
         }
 

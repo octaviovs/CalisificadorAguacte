@@ -62,7 +62,7 @@ namespace Core.Presenter
                 BolRegistro = objConexionSerial.setDato(dato);
                 if (BolRegistro == true)
                 {
-                    ViewConexionSerial.Mensaje("Se han listado correctamente todos los puertos disponibles", 4);
+                    ViewConexionSerial.Mensaje("Se pregundio", 4);
                    
                 }
                 else
@@ -77,7 +77,10 @@ namespace Core.Presenter
         }
 
 
-
+        /// <summary>
+        /// Escribe dato en arduino
+        /// </summary>
+        /// <param name="dato"></param>
         public void setDato(string dato)
         {
             bool BolRegistro = false;
@@ -100,14 +103,18 @@ namespace Core.Presenter
 
 
         }
-        public void getDato(string dato)
+        /// <summary>
+        /// Obtiene informacion serial
+        /// </summary>
+        /// <param name="dato"></param>
+        public void getDato()
         {
             bool BolRegistro = false;
             string info = "";
             if (ExisteConexion())
             {
                 
-                BolRegistro = objConexionSerial.getDato(ref info,dato);
+                BolRegistro = objConexionSerial.getDato(ref info);
                 if (BolRegistro == true)
                 {
                     ViewConexionSerial.Mensaje(info,10);

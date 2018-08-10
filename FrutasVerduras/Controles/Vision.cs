@@ -15,10 +15,13 @@ using Core.View;
 using Core.Procesamiento;
 namespace FrutasVerduras.Pantallas
 {
-    public partial class Vision : UserControl, ICamara
+    public partial class Vision : UserControl, ICamara,IDiccionario
     {
 
         private WCamara vistaCamara;
+
+        private CDiccionario objDiccionario;
+        private WDiccionario vistaDiccionario;
 
         private FilterInfoCollection Dispositivos;
         private VideoCaptureDevice FuenteDeVideo;
@@ -31,7 +34,13 @@ namespace FrutasVerduras.Pantallas
         public Vision()
         {
             InitializeComponent();
+
+
             vistaCamara = new WCamara(this);
+
+            vistaDiccionario = new WDiccionario(this);
+            objDiccionario = new CDiccionario();
+
             miHistograma = new Histograma();
 
         }
@@ -41,6 +50,92 @@ namespace FrutasVerduras.Pantallas
             //LISTAR DISPOSITIVOS DE ENTRADAS DE VIDEO
             vistaCamara.ListadoDispositivos();
         }
+      
+
+        private void buttonSeleccionar_Click(object sender, EventArgs e)
+        {
+            //ESTABLECER EL DISPOSITIVO SELECCIONADO COMO FUENTE DE VIDEO
+            FuenteDeVideo = new VideoCaptureDevice(Dispositivos[devicesCombo.SelectedIndex].MonikerString);
+            //INICIALIZAR EL CONTROL
+            FuenteDeVideo.NewFrame += new NewFrameEventHandler(c_NewFrame);
+            //INICIAR LA RECEPCIÓN DE IMAGENES
+            FuenteDeVideo.Start();
+        }
+        private void c_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Bitmap bm = (Bitmap)eventArgs.Frame.Clone();
+            pictureBoxCamara.Image = bm;
+        }
+
+        private void buttonDesconectar_Click(object sender, EventArgs e)
+        {
+            //DETENER LA RECEPCIÓN DE IMAGENES
+            FuenteDeVideo.SignalToStop();
+            FuenteDeVideo.WaitForStop();
+            FuenteDeVideo.Stop();
+        }
+
+        private void buttonFoto_Click(object sender, EventArgs e)
+        {
+            //VARIBALE PARA LA IMAGEN- imagen original
+            img = new Bitmap(pictureBoxCamara.Image);
+            //GUARDAR IMAGEN EN LA RUTA- se recorta la imagen orginar
+            pictureBoxFotoGenerica.Image = CropBitmap(img, 500, 500, 220, 220);
+            Bitmap fotoProcesada = new Bitmap(pictureBoxFotoGenerica.Image);
+
+            int[,] values = miHistograma.getHistograma(fotoProcesada);
+            int[] rojo = new int[values.GetLength(1)];
+            int[] verde = new int[values.GetLength(1)];
+            int[] azul = new int[values.GetLength(1)];
+            int[] generico = new int[values.GetLength(1)];
+
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    rojo[j] = (i == 0) ? values[i, j] : rojo[j];
+                    verde[j] = (i == 1) ? values[i, j] : verde[j];
+                    azul[j] = (i == 2) ? values[i, j] : azul[j];
+                }
+            }
+
+            histogramRojo.Values = rojo;
+            histogramVerde.Values = verde;
+            histogramAzul.Values = azul;
+           
+            int[] vR = miHistograma.GetPorcentajesColor(rojo);
+            int[] vV = miHistograma.GetPorcentajesColor(verde);
+            int[] vA = miHistograma.GetPorcentajesColor(azul);
+
+            objDiccionario.datoA = vR[0];
+            objDiccionario.datoB = vR[1];
+            objDiccionario.datoC = vR[2];
+            objDiccionario.datoD = vR[3];
+
+           // vistaDiccionario.Reguistrar(1,objDiccionario);
+            objDiccionario.datoA = vV[0];
+            objDiccionario.datoB = vV[1];
+            objDiccionario.datoC = vV[2];
+            objDiccionario.datoD = vV[3];
+
+          //  vistaDiccionario.Reguistrar(2, objDiccionario);
+            objDiccionario.datoA = vA[0];
+            objDiccionario.datoB = vA[1];
+            objDiccionario.datoC = vA[2];
+            objDiccionario.datoD = vA[3];
+
+         //   vistaDiccionario.Reguistrar(3, objDiccionario);
+
+        }
+
+        public Bitmap CropBitmap(Bitmap bitmap, int cropX, int cropY, int cropWidth, int cropHeight)
+        {
+            Rectangle rect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
+            Bitmap cropped = bitmap.Clone(rect, bitmap.PixelFormat);
+            return cropped;
+        }
+
+        
         #region ICamara
         public FilterInfoCollection videoDevices
         {
@@ -92,89 +187,39 @@ namespace FrutasVerduras.Pantallas
             }
         }
 
+
+
+        #endregion
+        #region IDiccionario
+        public CDiccionario DiccionarioObj
+        {
+            get
+            {
+                return null;
+            }
+
+            set
+            {
+
+            }
+        }
+
+        public DataSet DatosDT
+        {
+            set
+            {
+
+            }
+        }
+
         public void MensajeCamara(string Mensaje, int tipo)
         {
 
         }
-
+        public void MensajeDiccionario(string Mensaje, int tipo)
+        {
+           
+        }
         #endregion
-
-        private void buttonSeleccionar_Click(object sender, EventArgs e)
-        {
-            //ESTABLECER EL DISPOSITIVO SELECCIONADO COMO FUENTE DE VIDEO
-            FuenteDeVideo = new VideoCaptureDevice(Dispositivos[devicesCombo.SelectedIndex].MonikerString);
-            //INICIALIZAR EL CONTROL
-            FuenteDeVideo.NewFrame += new NewFrameEventHandler(c_NewFrame);
-            //INICIAR LA RECEPCIÓN DE IMAGENES
-            FuenteDeVideo.Start();
-        }
-        private void c_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            Bitmap bm = (Bitmap)eventArgs.Frame.Clone();
-            pictureBoxCamara.Image = bm;
-        }
-
-        private void buttonDesconectar_Click(object sender, EventArgs e)
-        {
-            //DETENER LA RECEPCIÓN DE IMAGENES
-            FuenteDeVideo.SignalToStop();
-            FuenteDeVideo.WaitForStop();
-            FuenteDeVideo.Stop();
-        }
-
-        private void buttonFoto_Click(object sender, EventArgs e)
-        {
-            //VARIBALE PARA LA IMAGEN- imagen original
-            img = new Bitmap(pictureBoxCamara.Image);
-            //GUARDAR IMAGEN EN LA RUTA- se recorta la imagen orginar
-            pictureBoxFotoGenerica.Image = CropBitmap(img, 500, 500, 220, 220);
-            Bitmap fotoProcesada = new Bitmap(pictureBoxFotoGenerica.Image);
-
-            int[,] values = miHistograma.getHistograma(fotoProcesada);
-            int[] rojo = new int[values.GetLength(1)];
-            int[] verde = new int[values.GetLength(1)];
-            int[] azul = new int[values.GetLength(1)];
-            int[] generico = new int[values.GetLength(1)];
-         
-            for (int i = 0; i < values.GetLength(0); i++)
-            {
-
-                for (int j = 0; j < values.GetLength(1); j++)
-                {
-                   
-                    rojo[j] = (i == 0) ? values[i, j] : rojo[j];
-                    verde[j] = (i == 1) ? values[i, j] : verde[j];
-                    azul[j] = (i == 2) ? values[i, j] : azul[j];
-                }
-
-            }
-
-            histogramRojo.Values = rojo;
-            histogramVerde.Values = verde;
-            histogramAzul.Values = azul;
-
-            int[] vR = miHistograma.GetPorcentajesColor(rojo);
-            int[] vV = miHistograma.GetPorcentajesColor(verde);
-            int[] vA = miHistograma.GetPorcentajesColor(azul);
-            string a = "";
-            string b = "";
-            string c = "";
-            for (int i = 0; i < vR.Length; i++)
-            {
-                a +="--" +vR[i]+"--";
-                b += "---"+vV[i]+"--";
-                c += vA[i];
-            }
-            textBox1.Text = a+"\n";
-           textBox1.Text +=" .........."+ b+"\n";
-           //textBox1.Text = c+"\n";
-        }
-
-        public Bitmap CropBitmap(Bitmap bitmap, int cropX, int cropY, int cropWidth, int cropHeight)
-        {
-            Rectangle rect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
-            Bitmap cropped = bitmap.Clone(rect, bitmap.PixelFormat);
-            return cropped;
-        }
     }
 }
