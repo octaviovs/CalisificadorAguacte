@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.buttonProceso = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamara)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFotoGenerica)).BeginInit();
@@ -186,19 +187,31 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Azul";
             // 
+            // buttonProceso
+            // 
+            this.buttonProceso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.buttonProceso.Location = new System.Drawing.Point(478, 3);
+            this.buttonProceso.Name = "buttonProceso";
+            this.buttonProceso.Size = new System.Drawing.Size(87, 53);
+            this.buttonProceso.TabIndex = 17;
+            this.buttonProceso.Text = "Proceso";
+            this.buttonProceso.UseVisualStyleBackColor = false;
+            this.buttonProceso.UseWaitCursor = true;
+            this.buttonProceso.Click += new System.EventHandler(this.buttonProceso_Click);
+            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(744, 73);
-            this.textBox1.Multiline = true;
+            this.textBox1.Location = new System.Drawing.Point(727, 95);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(347, 96);
-            this.textBox1.TabIndex = 16;
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 18;
             // 
             // Vision
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.buttonProceso);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -239,6 +252,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonProceso;
         private System.Windows.Forms.TextBox textBox1;
     }
 }

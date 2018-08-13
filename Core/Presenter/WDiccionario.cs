@@ -49,5 +49,30 @@ namespace Core.Presenter
 
             }
         }
+
+        public void EsMaduro( int opcion, CDiccionario datos )
+        {
+            DataSet dtsDatos = new DataSet();
+            CDiccionario objaux = new CDiccionario();
+
+            bool BolRegistro = false;
+            if (ExisteConexion())
+            {
+                BolRegistro = objaux.EsMaduro(opcion,  ref dtsDatos, datos);
+
+                if (BolRegistro == true)
+                {
+                    ViewDiccionario.DatosDT = dtsDatos;
+                    string a = dtsDatos.Tables[0].Rows[0][0].ToString();
+                    string b = dtsDatos.Tables[0].Rows[0][1].ToString();
+
+                    ViewDiccionario.MensajeDiccionario(a+"-"+b, 6);
+                }
+                else
+                {
+                    ViewDiccionario.MensajeDiccionario(" ", 0);
+                }
+            }
+        }
     }
 }

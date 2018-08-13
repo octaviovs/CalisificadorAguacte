@@ -15,7 +15,7 @@ using Core.View;
 using Core.Procesamiento;
 namespace FrutasVerduras.Pantallas
 {
-    public partial class Vision : UserControl, ICamara,IDiccionario
+    public partial class Vision : UserControl, ICamara,IDiccionario, IConexionSerial
     {
 
         private WCamara vistaCamara;
@@ -31,6 +31,11 @@ namespace FrutasVerduras.Pantallas
 
         public Histograma miHistograma;
 
+
+        conexionSerial ArudinoConexion;
+        WConexionSerial WconexionSerial;
+
+
         public Vision()
         {
             InitializeComponent();
@@ -42,6 +47,9 @@ namespace FrutasVerduras.Pantallas
             objDiccionario = new CDiccionario();
 
             miHistograma = new Histograma();
+
+
+            ArudinoConexion = conexionSerial.Instance;
 
         }
 
@@ -77,55 +85,7 @@ namespace FrutasVerduras.Pantallas
 
         private void buttonFoto_Click(object sender, EventArgs e)
         {
-            //VARIBALE PARA LA IMAGEN- imagen original
-            img = new Bitmap(pictureBoxCamara.Image);
-            //GUARDAR IMAGEN EN LA RUTA- se recorta la imagen orginar
-            pictureBoxFotoGenerica.Image = CropBitmap(img, 500, 500, 220, 220);
-            Bitmap fotoProcesada = new Bitmap(pictureBoxFotoGenerica.Image);
-
-            int[,] values = miHistograma.getHistograma(fotoProcesada);
-            int[] rojo = new int[values.GetLength(1)];
-            int[] verde = new int[values.GetLength(1)];
-            int[] azul = new int[values.GetLength(1)];
-            int[] generico = new int[values.GetLength(1)];
-
-            for (int i = 0; i < values.GetLength(0); i++)
-            {
-                for (int j = 0; j < values.GetLength(1); j++)
-                {
-                    rojo[j] = (i == 0) ? values[i, j] : rojo[j];
-                    verde[j] = (i == 1) ? values[i, j] : verde[j];
-                    azul[j] = (i == 2) ? values[i, j] : azul[j];
-                }
-            }
-
-            histogramRojo.Values = rojo;
-            histogramVerde.Values = verde;
-            histogramAzul.Values = azul;
-           
-            int[] vR = miHistograma.GetPorcentajesColor(rojo);
-            int[] vV = miHistograma.GetPorcentajesColor(verde);
-            int[] vA = miHistograma.GetPorcentajesColor(azul);
-
-            objDiccionario.datoA = vR[0];
-            objDiccionario.datoB = vR[1];
-            objDiccionario.datoC = vR[2];
-            objDiccionario.datoD = vR[3];
-
-           // vistaDiccionario.Reguistrar(1,objDiccionario);
-            objDiccionario.datoA = vV[0];
-            objDiccionario.datoB = vV[1];
-            objDiccionario.datoC = vV[2];
-            objDiccionario.datoD = vV[3];
-
-          //  vistaDiccionario.Reguistrar(2, objDiccionario);
-            objDiccionario.datoA = vA[0];
-            objDiccionario.datoB = vA[1];
-            objDiccionario.datoC = vA[2];
-            objDiccionario.datoD = vA[3];
-
-         //   vistaDiccionario.Reguistrar(3, objDiccionario);
-
+            proceso();
         }
 
         public Bitmap CropBitmap(Bitmap bitmap, int cropX, int cropY, int cropWidth, int cropHeight)
@@ -216,10 +176,142 @@ namespace FrutasVerduras.Pantallas
         {
 
         }
-        public void MensajeDiccionario(string Mensaje, int tipo)
+        #endregion
+
+        #region IconexionSerial
+        public conexionSerial objConexion
+        {
+            get
+            {
+                return null;
+            }
+
+            set
+            {
+
+            }
+        }
+
+        public List<string> puertos
+        {
+            get
+            {
+                return null;
+            }
+
+            set
+            {
+
+            }
+        }
+
+        public void Mensaje(string Mensaje, int tipo)
         {
            
         }
+
         #endregion
+
+        private void buttonProceso_Click(object sender, EventArgs e)
+        {
+            bandaProceso();
+        }
+
+        private void proceso()
+        {
+
+            //VARIBALE PARA LA IMAGEN- imagen original
+            img = new Bitmap(pictureBoxCamara.Image);
+            //GUARDAR IMAGEN EN LA RUTA- se recorta la imagen orginar
+            pictureBoxFotoGenerica.Image = CropBitmap(img, 500, 500, 220, 220);
+            Bitmap fotoProcesada = new Bitmap(pictureBoxFotoGenerica.Image);
+
+            int[,] values = miHistograma.getHistograma(fotoProcesada);
+            int[] rojo = new int[values.GetLength(1)];
+            int[] verde = new int[values.GetLength(1)];
+            int[] azul = new int[values.GetLength(1)];
+            int[] generico = new int[values.GetLength(1)];
+
+
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    rojo[j] = (i == 0) ? values[i, j] : rojo[j];
+                    verde[j] = (i == 1) ? values[i, j] : verde[j];
+                    azul[j] = (i == 2) ? values[i, j] : azul[j];
+                }
+            }
+
+            histogramRojo.Values = rojo;
+            histogramVerde.Values = verde;
+            histogramAzul.Values = azul;
+
+            int[] vR = miHistograma.GetPorcentajesColor(rojo);
+            int[] vV = miHistograma.GetPorcentajesColor(verde);
+            int[] vA = miHistograma.GetPorcentajesColor(azul);
+
+
+            CDiccionario valuesR = new CDiccionario();
+            valuesR.valueAr = vR[0];
+            valuesR.valueBr = vR[1];
+            valuesR.valueCr = vR[2];
+            valuesR.valueDr = vR[3];
+
+            valuesR.valueAv = vV[0];
+            valuesR.valueBv = vV[1];
+            valuesR.valueCv = vV[2];
+            valuesR.valueDv = vV[3];
+
+            valuesR.valueAa = vA[0];
+            valuesR.valueBa = vA[1];
+            valuesR.valueCa = vA[2];
+            valuesR.valueDa = vA[3];
+
+            vistaDiccionario.EsMaduro(6, valuesR);
+        }
+        private void bandaProceso() {
+
+            //Algoritmo
+            /*
+             1.- iniciar banda
+                la banda de mueve hasta que encuentra un objetivo
+             */
+            ArudinoConexion.setDato("a");
+
+
+        }
+        public void MensajeDiccionario(string Mensaje, int tipo)
+        {
+            textBox1.Text = "";
+            switch (tipo)
+            {
+                case 6:
+                  
+                    textBox1.Text = Mensaje;
+                    //deacuerdo al mensaje del proceso de la imagem
+                    //si es a esta madura
+                    //si es b esta verde
+                    //al saber que furta es
+                    //se mueve el brazo a un lago y se buelve
+                    //a realizar el proceso 
+                    if (Mensaje == "a")
+                    {
+                        ArudinoConexion.setDato("xx");
+                        bandaProceso();
+                    }
+                    if (Mensaje == "b")
+                    {
+                        ArudinoConexion.setDato("yy");
+                        bandaProceso();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
     }
 }
