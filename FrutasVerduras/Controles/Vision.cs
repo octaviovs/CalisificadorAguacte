@@ -280,6 +280,7 @@ namespace FrutasVerduras.Pantallas
             ArudinoConexion.setDato("a");
 
 
+
         }
         public void MensajeDiccionario(string Mensaje, int tipo)
         {
@@ -297,12 +298,12 @@ namespace FrutasVerduras.Pantallas
                     //a realizar el proceso 
                     if (Mensaje == "a")
                     {
-                        ArudinoConexion.setDato("xx");
+                        ArudinoConexion.setDato("x");
                         bandaProceso();
                     }
                     if (Mensaje == "b")
                     {
-                        ArudinoConexion.setDato("yy");
+                        ArudinoConexion.setDato("y");
                         bandaProceso();
                     }
                     break;
