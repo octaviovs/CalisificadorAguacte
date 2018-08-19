@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
@@ -15,7 +16,7 @@ using Core.View;
 using Core.Procesamiento;
 namespace FrutasVerduras.Pantallas
 {
-    public partial class Vision : UserControl, ICamara,IDiccionario, IConexionSerial
+    public partial class Vision : UserControl, ICamara, IDiccionario, IConexionSerial
     {
 
         private WCamara vistaCamara;
@@ -50,6 +51,8 @@ namespace FrutasVerduras.Pantallas
 
 
             ArudinoConexion = conexionSerial.Instance;
+            WconexionSerial = new WConexionSerial(this);
+           
 
         }
 
@@ -58,7 +61,7 @@ namespace FrutasVerduras.Pantallas
             //LISTAR DISPOSITIVOS DE ENTRADAS DE VIDEO
             vistaCamara.ListadoDispositivos();
         }
-      
+
 
         private void buttonSeleccionar_Click(object sender, EventArgs e)
         {
@@ -95,7 +98,7 @@ namespace FrutasVerduras.Pantallas
             return cropped;
         }
 
-        
+
         #region ICamara
         public FilterInfoCollection videoDevices
         {
@@ -205,17 +208,17 @@ namespace FrutasVerduras.Pantallas
             }
         }
 
-        public void Mensaje(string Mensaje, int tipo)
-        {
-           
-        }
 
         #endregion
 
         private void buttonProceso_Click(object sender, EventArgs e)
         {
+
+            labelDistancia.Text = "";
             bandaProceso();
+          
         }
+
 
         private void proceso()
         {
@@ -270,49 +273,89 @@ namespace FrutasVerduras.Pantallas
 
             vistaDiccionario.EsMaduro(6, valuesR);
         }
-        private void bandaProceso() {
+        private void bandaProceso()
+        {
 
             //Algoritmo
             /*
-             1.- iniciar banda
-                la banda de mueve hasta que encuentra un objetivo
+                este metodo envia una señal al arduino en dodne le dice
+                si hay un objeto enfrente de la camara, el resultado se ve
+                reflejado en la vista Mensaje
+           
              */
-            ArudinoConexion.setDato("a");
-
+        
+            WconexionSerial.setDato("h");
+       
+            WconexionSerial.getDato();
 
 
         }
         public void MensajeDiccionario(string Mensaje, int tipo)
         {
             textBox1.Text = "";
+            labelResultado.Text = "";
+            string res = "";
+
             switch (tipo)
             {
                 case 6:
-                  
+
+                    string[] values = Mensaje.Split('|');
                     textBox1.Text = Mensaje;
-                    //deacuerdo al mensaje del proceso de la imagem
-                    //si es a esta madura
-                    //si es b esta verde
-                    //al saber que furta es
-                    //se mueve el brazo a un lago y se buelve
-                    //a realizar el proceso 
-                    if (Mensaje == "a")
+                    // si a es mayor a b es maduro
+                    if (Convert.ToInt32(values[0]) > Convert.ToInt32(values[1]))
                     {
-                        ArudinoConexion.setDato("x");
-                        bandaProceso();
+                        res = "a";
                     }
-                    if (Mensaje == "b")
+                    else
                     {
-                        ArudinoConexion.setDato("y");
-                        bandaProceso();
+                        res = "b";
+                    }
+
+                    if (res == "a")
+                    {
+
+                        labelResultado.Text = "MADURO";
+                    }
+                    if (res == "b")
+                    {
+                        labelResultado.Text = "VERDE";
+
                     }
                     break;
                 default:
                     break;
             }
         }
+        public void Mensaje(string Mensaje, int tipo)
+        {
+            labelDistancia.Text = "";
+            
 
 
+            if (Mensaje == "11")
+            {
+                // cuando me regrese un 11 arduino dice que si hay algo enfrente 
+                //entonces tenemos que procesar la imgen en un tiempo de 5 segundos
+                //para esto se relaiza el proceso de 
+                //    proceso();
+                labelDistancia.Text = "11";
+
+            }
+            if (Mensaje == "00")
+            {
+                labelDistancia.Text = "00";
+
+                //en caso que retorne un 00 significa que NO HAY un objeto enfren el arduino avanca 10 cm
+                //se vulve a repetir el proceso hasta que sea 11
+                //    bandaProceso();
+            }
+
+
+
+        }
+
+      
 
     }
 }

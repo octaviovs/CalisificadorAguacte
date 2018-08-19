@@ -44,6 +44,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.buttonProceso = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.labelResultado = new System.Windows.Forms.Label();
+            this.labelDistancia = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamara)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFotoGenerica)).BeginInit();
             this.SuspendLayout();
@@ -190,7 +193,7 @@
             // buttonProceso
             // 
             this.buttonProceso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.buttonProceso.Location = new System.Drawing.Point(478, 3);
+            this.buttonProceso.Location = new System.Drawing.Point(723, 3);
             this.buttonProceso.Name = "buttonProceso";
             this.buttonProceso.Size = new System.Drawing.Size(87, 53);
             this.buttonProceso.TabIndex = 17;
@@ -201,15 +204,48 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(727, 95);
+            this.textBox1.Location = new System.Drawing.Point(801, 162);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 18;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(718, 110);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(115, 25);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Resultado:";
+            // 
+            // labelResultado
+            // 
+            this.labelResultado.AutoSize = true;
+            this.labelResultado.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResultado.Location = new System.Drawing.Point(851, 110);
+            this.labelResultado.Name = "labelResultado";
+            this.labelResultado.Size = new System.Drawing.Size(115, 25);
+            this.labelResultado.TabIndex = 20;
+            this.labelResultado.Text = "Resultado:";
+            // 
+            // labelDistancia
+            // 
+            this.labelDistancia.AutoSize = true;
+            this.labelDistancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDistancia.Location = new System.Drawing.Point(851, 20);
+            this.labelDistancia.Name = "labelDistancia";
+            this.labelDistancia.Size = new System.Drawing.Size(101, 25);
+            this.labelDistancia.TabIndex = 21;
+            this.labelDistancia.Text = "Distancia";
             // 
             // Vision
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelDistancia);
+            this.Controls.Add(this.labelResultado);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonProceso);
             this.Controls.Add(this.label5);
@@ -254,5 +290,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonProceso;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelResultado;
+        private System.Windows.Forms.Label labelDistancia;
     }
 }

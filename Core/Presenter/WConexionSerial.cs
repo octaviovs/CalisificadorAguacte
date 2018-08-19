@@ -39,12 +39,13 @@ namespace Core.Presenter
             bool BolRegistro = false;
             if (!ExisteConexion())
             {
-                List<string> conexiones =new List<string>();
+                List<string> conexiones = new List<string>();
                 BolRegistro = objConexionSerial.obtenerPuertos(ref conexiones);
-                if (BolRegistro == true) {
+                if (BolRegistro == true)
+                {
                     ViewConexionSerial.Mensaje("Se han listado correctamente todos los puertos disponibles", 2);
                     ViewConexionSerial.puertos = conexiones;
-                } 
+                }
                 else
                     ViewConexionSerial.Mensaje("No hay puertos COM disponible, verifique sus dispositivos, o las conexiones", 3);
             }
@@ -58,12 +59,12 @@ namespace Core.Presenter
             bool BolRegistro = false;
             if (ExisteConexion())
             {
-                
+
                 BolRegistro = objConexionSerial.setDato(dato);
                 if (BolRegistro == true)
                 {
                     ViewConexionSerial.Mensaje("Se pregundio", 4);
-                   
+
                 }
                 else
                     ViewConexionSerial.Mensaje("No hay puertos COM disponible, verifique sus dispositivos, o las conexiones", 3);
@@ -90,7 +91,7 @@ namespace Core.Presenter
                 BolRegistro = objConexionSerial.setDato(dato);
                 if (BolRegistro == true)
                 {
-                  
+
 
                 }
                 else
@@ -113,14 +114,17 @@ namespace Core.Presenter
             string info = "";
             if (ExisteConexion())
             {
-                
+
                 BolRegistro = objConexionSerial.getDato(ref info);
                 if (BolRegistro == true)
                 {
-                    ViewConexionSerial.Mensaje(info,10);
+                    ViewConexionSerial.Mensaje(info, 10);
                 }
                 else
-                    ViewConexionSerial.Mensaje("Error", 3);
+                {
+                    ViewConexionSerial.Mensaje("E", 3);
+                }
+
             }
             else
             {

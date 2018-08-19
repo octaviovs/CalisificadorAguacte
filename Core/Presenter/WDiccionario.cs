@@ -66,7 +66,7 @@ namespace Core.Presenter
                     string a = dtsDatos.Tables[0].Rows[0][0].ToString();
                     string b = dtsDatos.Tables[0].Rows[0][1].ToString();
 
-                    ViewDiccionario.MensajeDiccionario(a+"-"+b, 6);
+                    ViewDiccionario.MensajeDiccionario(a+"|"+b, 6);
                 }
                 else
                 {

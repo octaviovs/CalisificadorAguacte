@@ -117,6 +117,10 @@ namespace Core.Model
             try {
 
                 info = miPuerto.ReadExisting();
+
+                if (string.IsNullOrEmpty(info)) {
+                    info = miPuerto.ReadExisting();
+                }
                 bandera = (string.IsNullOrEmpty(info)) ? false:true;
             }
             catch (Exception)
