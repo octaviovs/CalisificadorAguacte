@@ -39,9 +39,19 @@ namespace FrutasVerduras.Pantallas
         WConexionSerial WconexionSerial;
         public bool bandera = true;
 
+        //hilos
+        ThreadStart delegadoArduino;
+        ThreadStart delegadoCamara;
+        Thread hiloArduino;
+        Thread hiloCamara;
+
+        delegate void CambiarProgresoDelegado(string texto, int valor);
+
+
         public Vision()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
 
 
             vistaCamara = new WCamara(this);
@@ -55,7 +65,9 @@ namespace FrutasVerduras.Pantallas
             ArudinoConexion = conexionSerial.Instance;
             WconexionSerial = new WConexionSerial(this);
             bandera = true;
-           
+
+
+
 
         }
 
@@ -183,7 +195,6 @@ namespace FrutasVerduras.Pantallas
 
         }
         #endregion
-
         #region IconexionSerial
         public conexionSerial objConexion
         {
@@ -210,6 +221,33 @@ namespace FrutasVerduras.Pantallas
 
             }
         }
+        public void Mensaje(string Mensaje, int tipo)
+        {
+
+
+
+
+            if (Mensaje == "11")
+            {
+                // cuando me regrese un 11 arduino dice que si hay algo enfrente 
+                //entonces tenemos que procesar la imgen en un tiempo de 5 segundos
+                //para esto se relaiza el proceso de 
+                //    proceso();
+                // labelDistancia.Text = "11";
+
+            }
+            if (Mensaje == "00")
+            {
+                //  labelDistancia.Text = "00";
+
+                //en caso que retorne un 00 significa que NO HAY un objeto enfren el arduino avanca 10 cm
+                //se vulve a repetir el proceso hasta que sea 11
+                //    bandaProceso();
+            }
+
+
+
+        }
 
 
         #endregion
@@ -218,26 +256,23 @@ namespace FrutasVerduras.Pantallas
 
         private void buttonProceso_Click(object sender, EventArgs e)
         {
-            ThreadStart delegadoArduino = new ThreadStart(bandaProceso);
-            ThreadStart delegadoCamara = new ThreadStart(CamaraProceso);
+            delegadoArduino = new ThreadStart(bandaProceso);
+            delegadoCamara = new ThreadStart(CamaraProceso);
             //Creamos la instancia del hilo 
-            Thread hiloArduino = new Thread(delegadoArduino);
-            Thread hiloCamara = new Thread(delegadoCamara);
+            hiloArduino = new Thread(delegadoArduino);
+            hiloCamara = new Thread(delegadoCamara);
             try
-                {
+            {
                 //Iniciamos el hilo 
                 hiloArduino.Start();
-                hiloCamara.Start();
-                }
-                catch (Exception)
-                {
+                 hiloCamara.Start();
+            }
+            catch (Exception)
+            {
                 hiloArduino.Abort();
-                hiloCamara.Abort();
-                }
+                  hiloCamara.Abort();
+            }
 
-
-     
-            
         }
         private void bandaProceso()
         {
@@ -258,20 +293,18 @@ namespace FrutasVerduras.Pantallas
             {
                 Thread.Sleep(3000);
                 WconexionSerial.setDato("a");
-                Thread.Sleep(3000);
-
+                Thread.Sleep(3200);
             }
 
         }
-        private void CamaraProceso() {
+        private void CamaraProceso()
+        {
             while (bandera)
             {
                 Thread.Sleep(3000);
                 proceso();
             }
         }
-
-
         private void proceso()
         {
 
@@ -336,75 +369,76 @@ namespace FrutasVerduras.Pantallas
             valuesR.valueCa = vA[2];
             valuesR.valueDa = vA[3];
 
-           vistaDiccionario.EsMaduro(6, valuesR);
+            vistaDiccionario.EsMaduro(6, valuesR);
         }
-     
+
         public void MensajeDiccionario(string Mensaje, int tipo)
         {
             textBox1.Text = "";
-           
+
             string res = "";
 
             switch (tipo)
             {
                 case 6:
-
-                    string[] values = Mensaje.Split('|');
-//                    textBox1.Text = Mensaje;
-                    // si a es mayor a b es maduro
-                    if (Convert.ToInt32(values[0]) > Convert.ToInt32(values[1]))
+                    if (this.InvokeRequired)
                     {
-                        res = "a";
+                        CambiarProgresoDelegado delegado = new CambiarProgresoDelegado(MensajeDiccionario);
+                        try
+                        {
+                            
+
+
+                            object[] parametros = new object[] { Mensaje, tipo };
+                            //invocamos el método a través del mismo contexto del formulario (this) y enviamos los parámetros 
+                            this.Invoke(delegado, parametros);
+
+                        }
+                        catch (Exception)
+                        {
+
+                             delegado = null;
+
+                             delegado = new CambiarProgresoDelegado(MensajeDiccionario);
+                            object[] parametros = new object[] { Mensaje, tipo };
+                            //invocamos el método a través del mismo contexto del formulario (this) y enviamos los parámetros 
+                            this.Invoke(delegado, parametros);
+                        }
+
                     }
                     else
                     {
-                        res = "b";
-                    }
+                        string[] values = Mensaje.Split('|');
+                        //                    textBox1.Text = Mensaje;
+                        // si a es mayor a b es maduro
+                        if (Convert.ToInt32(values[0]) > Convert.ToInt32(values[1]))
+                        {
+                            res = "a";
+                        }
+                        else
+                        {
+                            res = "b";
+                        }
 
-                    if (res == "a")
-                    {
+                        if (res == "a")
+                        {
 
-               //       labelResultado.Text = "MADURO";
-                    }
-                    if (res == "b")
-                    {
-                       //labelResultado.Text = "VERDE";
+                            labelResultado.Text = "MADURO";
+                        }
+                        if (res == "b")
+                        {
 
+                            labelResultado.Text = "VERDE";
+                            //   WconexionSerial.setDato("k");
+                        }
                     }
                     break;
                 default:
                     break;
             }
         }
-        public void Mensaje(string Mensaje, int tipo)
-        {
-            
-            
 
 
-            if (Mensaje == "11")
-            {
-                // cuando me regrese un 11 arduino dice que si hay algo enfrente 
-                //entonces tenemos que procesar la imgen en un tiempo de 5 segundos
-                //para esto se relaiza el proceso de 
-                //    proceso();
-              // labelDistancia.Text = "11";
-
-            }
-            if (Mensaje == "00")
-            {
-              //  labelDistancia.Text = "00";
-
-                //en caso que retorne un 00 significa que NO HAY un objeto enfren el arduino avanca 10 cm
-                //se vulve a repetir el proceso hasta que sea 11
-                //    bandaProceso();
-            }
-
-
-
-        }
-
-      
 
     }
 }
