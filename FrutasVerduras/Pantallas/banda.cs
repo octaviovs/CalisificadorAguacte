@@ -66,18 +66,28 @@ namespace FrutasVerduras.Pantallas
 
         private void buttonOn_Click(object sender, EventArgs e)
         {
-            vistaConexionSerial.prednerLed("x");
+            vistaConexionSerial.prednerLed("d");
         }
 
         private void buttonOff_Click(object sender, EventArgs e)
         {
-            vistaConexionSerial.prednerLed("y");
+            vistaConexionSerial.prednerLed("e");
         }
 
         private void buttonData_Click(object sender, EventArgs e)
         {
             vistaConexionSerial.setDato("e");
             vistaConexionSerial.getDato();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            vistaConexionSerial.prednerLed("f");
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            vistaConexionSerial.prednerLed("g");
         }
     }
 }

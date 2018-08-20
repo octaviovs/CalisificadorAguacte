@@ -271,7 +271,7 @@ namespace FrutasVerduras.Pantallas
             valuesR.valueCa = vA[2];
             valuesR.valueDa = vA[3];
 
-            vistaDiccionario.EsMaduro(6, valuesR);
+          //  vistaDiccionario.EsMaduro(6, valuesR);
         }
         private void bandaProceso()
         {
