@@ -46,7 +46,7 @@ namespace FrutasVerduras.Pantallas
         Thread hiloCamara;
 
         delegate void CambiarProgresoDelegado(string texto, int valor);
-
+        delegate void CambiarProgresoDelegadoFoto();
 
         public Vision()
         {
@@ -265,12 +265,12 @@ namespace FrutasVerduras.Pantallas
             {
                 //Iniciamos el hilo 
                 hiloArduino.Start();
-                 hiloCamara.Start();
+                hiloCamara.Start();
             }
             catch (Exception)
             {
                 hiloArduino.Abort();
-                  hiloCamara.Abort();
+                hiloCamara.Abort();
             }
 
         }
@@ -307,16 +307,25 @@ namespace FrutasVerduras.Pantallas
         }
         private void proceso()
         {
+            img = null;
 
-            //VARIBALE PARA LA IMAGEN- imagen original
             try
             {
                 img = new Bitmap(pictureBoxCamara.Image);
             }
             catch (Exception)
             {
-                img = null;
-                img = new Bitmap(pictureBoxCamara.Image);
+
+                if (pictureBoxCamara.InvokeRequired)
+                {
+                    CambiarProgresoDelegadoFoto delegadoArduino = new CambiarProgresoDelegadoFoto(proceso);
+                    this.Invoke(delegadoArduino, null);
+                }
+                else
+                {
+                    img = new Bitmap(pictureBoxCamara.Image);
+
+                }
             }
 
 
@@ -386,7 +395,7 @@ namespace FrutasVerduras.Pantallas
                         CambiarProgresoDelegado delegado = new CambiarProgresoDelegado(MensajeDiccionario);
                         try
                         {
-                            
+
 
 
                             object[] parametros = new object[] { Mensaje, tipo };
@@ -397,9 +406,9 @@ namespace FrutasVerduras.Pantallas
                         catch (Exception)
                         {
 
-                             delegado = null;
+                            delegado = null;
 
-                             delegado = new CambiarProgresoDelegado(MensajeDiccionario);
+                            delegado = new CambiarProgresoDelegado(MensajeDiccionario);
                             object[] parametros = new object[] { Mensaje, tipo };
                             //invocamos el método a través del mismo contexto del formulario (this) y enviamos los parámetros 
                             this.Invoke(delegado, parametros);
@@ -429,7 +438,7 @@ namespace FrutasVerduras.Pantallas
                         {
 
                             labelResultado.Text = "VERDE";
-                            //   WconexionSerial.setDato("k");
+                            WconexionSerial.setDato("k");
                         }
                     }
                     break;
