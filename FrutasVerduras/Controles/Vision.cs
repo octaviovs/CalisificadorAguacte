@@ -433,12 +433,14 @@ namespace FrutasVerduras.Pantallas
                         {
 
                             labelResultado.Text = "MADURO";
+                            WconexionSerial.setDato("k");
                         }
                         if (res == "b")
                         {
 
                             labelResultado.Text = "VERDE";
-                            WconexionSerial.setDato("k");
+                            
+                       
                         }
                     }
                     break;
