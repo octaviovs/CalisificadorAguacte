@@ -193,7 +193,7 @@
             // buttonProceso
             // 
             this.buttonProceso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.buttonProceso.Location = new System.Drawing.Point(488, 3);
+            this.buttonProceso.Location = new System.Drawing.Point(606, 3);
             this.buttonProceso.Name = "buttonProceso";
             this.buttonProceso.Size = new System.Drawing.Size(87, 53);
             this.buttonProceso.TabIndex = 17;

@@ -103,7 +103,7 @@ namespace FrutasVerduras.Pantallas
 
         private void buttonFoto_Click(object sender, EventArgs e)
         {
-            proceso();
+            GuardarFotp();
         }
 
         public Bitmap CropBitmap(Bitmap bitmap, int cropX, int cropY, int cropWidth, int cropHeight)
@@ -274,6 +274,9 @@ namespace FrutasVerduras.Pantallas
             }
 
         }
+        /// <summary>
+        /// Medotodo que hace avanzar la bamda
+        /// </summary>
         private void bandaProceso()
         {
 
@@ -297,6 +300,9 @@ namespace FrutasVerduras.Pantallas
             }
 
         }
+        /// <summary>
+        /// Metodo que realiza la captira de imagen
+        /// </summary>
         private void CamaraProceso()
         {
             while (bandera)
@@ -305,6 +311,9 @@ namespace FrutasVerduras.Pantallas
                 proceso();
             }
         }
+        /// <summary>
+        /// Metodo que se encarga de procesar la imagen
+        /// </summary>
         private void proceso()
         {
             img = null;
@@ -381,6 +390,73 @@ namespace FrutasVerduras.Pantallas
             vistaDiccionario.EsMaduro(6, valuesR);
         }
 
+        private void GuardarFotp()
+        {
+            img = null;
+
+            try
+            {
+                img = new Bitmap(pictureBoxCamara.Image);
+            }
+            catch (Exception)
+            {
+
+                img = new Bitmap(pictureBoxCamara.Image);
+            }
+
+
+
+
+
+            //GUARDAR IMAGEN EN LA RUTA- se recorta la imagen orginar
+            pictureBoxFotoGenerica.Image = CropBitmap(img, 500, 500, 220, 220);
+            Bitmap fotoProcesada = new Bitmap(pictureBoxFotoGenerica.Image);
+
+            int[,] values = miHistograma.getHistograma(fotoProcesada);
+            int[] rojo = new int[values.GetLength(1)];
+            int[] verde = new int[values.GetLength(1)];
+            int[] azul = new int[values.GetLength(1)];
+            int[] generico = new int[values.GetLength(1)];
+
+
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    rojo[j] = (i == 0) ? values[i, j] : rojo[j];
+                    verde[j] = (i == 1) ? values[i, j] : verde[j];
+                    azul[j] = (i == 2) ? values[i, j] : azul[j];
+                }
+            }
+
+            histogramRojo.Values = rojo;
+            histogramVerde.Values = verde;
+            histogramAzul.Values = azul;
+
+            int[] vR = miHistograma.GetPorcentajesColor(rojo);
+            int[] vV = miHistograma.GetPorcentajesColor(verde);
+            int[] vA = miHistograma.GetPorcentajesColor(azul);
+
+
+            CDiccionario valuesR = new CDiccionario();
+            valuesR.valueAr = vR[0];
+            valuesR.valueBr = vR[1];
+            valuesR.valueCr = vR[2];
+            valuesR.valueDr = vR[3];
+
+            valuesR.valueAv = vV[0];
+            valuesR.valueBv = vV[1];
+            valuesR.valueCv = vV[2];
+            valuesR.valueDv = vV[3];
+
+            valuesR.valueAa = vA[0];
+            valuesR.valueBa = vA[1];
+            valuesR.valueCa = vA[2];
+            valuesR.valueDa = vA[3];
+            valuesR.tipo = 1;
+
+          vistaDiccionario.Reguistrar(1, valuesR);
+        }
         public void MensajeDiccionario(string Mensaje, int tipo)
         {
             textBox1.Text = "";

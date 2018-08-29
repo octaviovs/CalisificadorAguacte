@@ -1,0 +1,10 @@
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\bin\Release\FrutasVerduras.exe.config
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Controles.HistoGrafica.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Form1.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Pantallas.banda.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Pantallas.Conexion.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Pantallas.ConfCamara.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Pantallas.contenedor.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Pantallas.Vision.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.Properties.Resources.resources
+C:\Users\octav\Desktop\FrutasVerduras\FrutasVerduras\obj\Release\FrutasVerduras.csproj.GenerateResource.Cache
